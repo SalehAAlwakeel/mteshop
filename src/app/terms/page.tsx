@@ -14,7 +14,7 @@ export default function TermsPage() {
       </h1>
       <p className="mt-6">
         {ar
-          ? "أسعار الكتالوج بالريال السعودي وتشمل ضريبة القيمة المضافة ١٥٪. الأعمال حسب الطلب تبدأ من السعر الظاهر، ويُؤكد السعر النهائي بعد مراجعة الملف."
+          ? "أسعار الكتالوج تشمل ضريبة القيمة المضافة ١٥٪. الأعمال حسب الطلب تبدأ من السعر الظاهر، ويُؤكد السعر النهائي بعد مراجعة الملف."
           : "Catalog prices are in Saudi Riyal and include 15% VAT. Made-to-order lines start at the listed amount; the final price is confirmed after we review your file."}
       </p>
       <p className="mt-4">

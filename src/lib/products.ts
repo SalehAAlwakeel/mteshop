@@ -96,44 +96,6 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "resin-prototype",
-    sku: "MTE-3D-SLA",
-    category: "3d-printing",
-    name: { en: "Resin prototype", ar: "نموذج أولي راتنجي" },
-    short: {
-      en: "High-detail SLA for jewelry masters, dental mocks, and crisp housings.",
-      ar: "طباعة راتنج عالية التفاصيل لقوالب المجوهرات والنماذج الطبية والأغلفة الدقيقة.",
-    },
-    description: {
-      en: "MSLA resin printing with 50 micron layers. We offer standard grey, tough, and castable-style resins. Perfect when FDM layer lines would show on a client-facing model.",
-      ar: "طباعة راتنج بدقة ٥٠ ميكرون. نوفر راتنج رمادي قياسي، ومتين، وقابل للصب. الخيار الصحيح عندما لا تناسب خطوط FDM نموذجاً يُعرض للعميل.",
-    },
-    price: 140,
-    fromPrice: true,
-    leadTimeDays: 4,
-    featured: true,
-    madeToOrder: true,
-    options: [
-      {
-        id: "resin",
-        name: { en: "Resin", ar: "الراتنج" },
-        values: [
-          { id: "standard", label: { en: "Standard grey", ar: "رمادي قياسي" } },
-          { id: "tough", label: { en: "Tough +45", ar: "متين ‎+٤٥" }, priceDelta: 45 },
-          { id: "clear", label: { en: "Clear +30", ar: "شفاف ‎+٣٠" }, priceDelta: 30 },
-        ],
-      },
-    ],
-    specs: [
-      { label: { en: "Layer height", ar: "ارتفاع الطبقة" }, value: { en: "50 μm", ar: "٥٠ ميكرون" } },
-      { label: { en: "Post-process", ar: "المعالجة" }, value: { en: "Wash, UV cure, support cleanup", ar: "غسيل، معالجة UV، تنظيف الدعم" } },
-    ],
-    includes: [
-      { en: "Cured, support-free delivery", ar: "تسليم معالج وخالٍ من الدعم" },
-      { en: "Dimensional check", ar: "فحص أبعاد" },
-    ],
-  },
-  {
     slug: "architectural-model",
     sku: "MTE-3D-ARCH",
     category: "3d-printing",
@@ -217,7 +179,7 @@ export const products: Product[] = [
     },
     description: {
       en: "Printed souvenirs for events, offices, and gifts in Riyadh. Choose a keychain, a desk model, or a name piece. We print in PLA or resin, then clean the supports so the gift is ready to hand over.",
-      ar: "تذكارات مطبوعة للفعاليات والمكاتب والهدايا في الرياض. اختر سلسلة مفاتيح أو مجسم مكتب أو قطعة باسم. نطبع بـ PLA أو الراتنج ثم ننظف الدعم حتى تكون الهدية جاهزة للتسليم.",
+      ar: "تذكارات مطبوعة للفعاليات والمكاتب والهدايا في الرياض. اختر سلسلة مفاتيح أو مجسم مكتب أو قطعة باسم. نطبع بـ PLA أو بطباعة أنعم للتفاصيل الدقيقة، ثم ننظف الدعم حتى تكون الهدية جاهزة للتسليم.",
     },
     price: 35,
     fromPrice: true,
@@ -246,7 +208,7 @@ export const products: Product[] = [
       },
     ],
     specs: [
-      { label: { en: "Process", ar: "العملية" }, value: { en: "FDM or resin", ar: "FDM أو راتنج" } },
+      { label: { en: "Process", ar: "العملية" }, value: { en: "FDM or resin", ar: "طباعة عادية أو ناعمة" } },
     ],
     includes: [
       { en: "Support cleanup", ar: "تنظيف الدعم" },

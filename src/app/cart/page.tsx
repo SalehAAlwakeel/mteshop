@@ -2,8 +2,7 @@
 
 import { Button } from "@/components/Button";
 import { ProductVisual } from "@/components/ProductVisual";
-import { cartSubtotal, describeItem, useCart } from "@/lib/cart";
-import { formatSar } from "@/lib/format";
+import { describeItem, useCart } from "@/lib/cart";
 import { useI18n } from "@/lib/i18n";
 import type { Category } from "@/lib/products";
 import { Minus, Plus, Trash2 } from "lucide-react";
@@ -14,7 +13,6 @@ export default function CartPage() {
   const items = useCart((s) => s.items);
   const setQty = useCart((s) => s.setQty);
   const remove = useCart((s) => s.remove);
-  const subtotal = cartSubtotal(items);
 
   if (items.length === 0) {
     return (
@@ -50,7 +48,6 @@ export default function CartPage() {
                 {item.name[lang]}
               </Link>
               <p className="mt-1 text-xs text-mute">{describeItem(item, lang)}</p>
-              <p className="mt-2 text-laser">{formatSar(item.unitPrice, lang)}</p>
             </div>
             <div className="flex items-center gap-3">
               <button
@@ -82,9 +79,6 @@ export default function CartPage() {
         ))}
       </div>
       <div className="mt-10 flex flex-col items-start justify-between gap-4 rounded-3xl border border-line p-6 sm:flex-row sm:items-center">
-        <p className="text-lg">
-          {t("cart.subtotal")}: <span className="text-laser">{formatSar(subtotal, lang)}</span>
-        </p>
         <Button href="/checkout">{t("cart.checkout")}</Button>
       </div>
     </div>

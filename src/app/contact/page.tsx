@@ -17,6 +17,7 @@ export default function ContactPage() {
     e.preventDefault();
     window.location.href = whatsappLink(
       `${name} · ${phone}\n${message}\n\n${site.address.en}`,
+      lang,
     );
   }
 
@@ -39,7 +40,10 @@ export default function ContactPage() {
           </li>
           <li className="flex gap-3">
             <Phone className="mt-0.5 text-laser" size={18} />
-            <a href={`tel:${site.phoneTel}`}>{site.phoneDisplay}</a>
+            <span className="flex flex-col gap-1">
+              <a href={`tel:${site.phones.en.tel}`}>{site.phones.en.display}</a>
+              <a href={`tel:${site.phones.ar.tel}`}>{site.phones.ar.display}</a>
+            </span>
           </li>
           <li className="flex gap-3">
             <Mail className="mt-0.5 text-laser" size={18} />

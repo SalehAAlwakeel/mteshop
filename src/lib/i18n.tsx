@@ -25,7 +25,7 @@ const dictionary = {
     kicker: { en: "Riyadh fabrication studio", ar: "استوديو تصنيع في الرياض" },
     title: {
       en: "Print it. Lay it up. Cut it. Delivered in the Kingdom.",
-      ar: "نطبع. نفرش الكربون. نقص بالليزر. ونسلّم في المملكة.",
+      ar: "نطبعها. نصممها. نركبها.",
     },
     body: {
       en: "MTE makes 3D printed parts, real carbon fiber, and laser-cut or engraved work from our office in Al Mursalat, Riyadh. Upload a file, pick a catalog piece, or walk in.",
@@ -50,7 +50,7 @@ const dictionary = {
     printTitle: { en: "3D printing", ar: "طباعة ثلاثية الأبعاد" },
     printBody: {
       en: "FDM and resin. Prototypes, jigs, architectural massing, and short-run housings with a printability check before we start.",
-      ar: "FDM وراتنج. نماذج أولية، مركبات، كتل معمارية، وأغلفة بكميات صغيرة مع فحص قابلية الطباعة قبل البدء.",
+      ar: "طباعة عادية وطباعة ناعمة عالية التفاصيل. نماذج أولية، مركبات، كتل معمارية، وأغلفة بكميات صغيرة مع فحص قابلية الطباعة قبل البدء.",
     },
     carbonTitle: { en: "Carbon fiber", ar: "ألياف الكربون" },
     carbonBody: {
@@ -87,7 +87,7 @@ const dictionary = {
     s2t: { en: "2 · Engineer", ar: "٢ · هندسة" },
     s2b: {
       en: "We check thickness, kerf, fibre direction, and supports. You get a WhatsApp proof and a firm SAR quote.",
-      ar: "نراجع السماكة وعرض القص واتجاه الألياف والدعم. تصلك مسودة واتساب وعرض سعر بالريال.",
+      ar: "نراجع السماكة وعرض القص واتجاه الألياف والدعم. تصلك مسودة واتساب وعرض سعر.",
     },
     s3t: { en: "3 · Fabricate", ar: "٣ · تصنيع" },
     s3b: {
@@ -155,8 +155,8 @@ const dictionary = {
   checkout: {
     title: { en: "Send a quote", ar: "أرسل عرض سعر" },
     body: {
-      en: "We email this cart to the shop as a quote. The workshop replies with timing and a confirmed price.",
-      ar: "نرسل هذه السلة بالبريد إلى الورشة كعرض سعر. ترد الورشة بالموعد والسعر المؤكد.",
+      en: "Write your name and mobile. We email the quote to the shop, and the workshop replies on WhatsApp.",
+      ar: "اكتب اسمك وجوالك. نرسل عرض السعر إلى بريد الورشة، وترد الورشة عبر واتساب.",
     },
     details: { en: "Your details", ar: "بياناتك" },
     name: { en: "Full name", ar: "الاسم الكامل" },
@@ -184,10 +184,14 @@ const dictionary = {
     required: { en: "Please fill name and a Saudi mobile number.", ar: "يرجى إدخال الاسم ورقم جوال سعودي." },
   },
   success: {
-    title: { en: "Quote ready", ar: "عرض السعر جاهز" },
+    title: { en: "Quote sent", ar: "أُرسل عرض السعر" },
     body: {
-      en: "Your email app opened with this quote addressed to sales@mteksa.com. Send that message so the shop can reply.",
-      ar: "فُتح تطبيق البريد برسالة عرض السعر إلى sales@mteksa.com. أرسل الرسالة حتى ترد الورشة.",
+      en: "Your quote was emailed to sales@mteksa.com. The shop will reply on WhatsApp.",
+      ar: "أُرسل عرض السعر إلى sales@mteksa.com. ترد الورشة عبر واتساب.",
+    },
+    bodyMail: {
+      en: "Your email app opened with this quote addressed to sales@mteksa.com. Send that message so the shop can reply on WhatsApp.",
+      ar: "فُتح تطبيق البريد برسالة عرض السعر إلى sales@mteksa.com. أرسل الرسالة حتى ترد الورشة عبر واتساب.",
     },
     id: { en: "Quote", ar: "عرض" },
     whatsapp: { en: "Message the shop", ar: "راسل الورشة" },
@@ -195,7 +199,7 @@ const dictionary = {
   },
   quote: {
     kicker: { en: "Custom work", ar: "عمل مخصص" },
-    title: { en: "Send a file. Get a SAR quote.", ar: "أرسل ملفاً. احصل على عرض بالريال." },
+    title: { en: "Send a file. Get a SAR quote.", ar: "أرسل ملفاً. احصل على عرض سعر." },
     body: {
       en: "Tell us the process, material, and deadline. Attach names of STL / STEP / DXF / SVG / AI files — then WhatsApp the actual files to the shop line.",
       ar: "حدد العملية والمادة والموعد. اذكر أسماء ملفات STL / STEP / DXF / SVG / AI ثم أرسل الملفات نفسها على واتساب الورشة.",
@@ -213,14 +217,14 @@ const dictionary = {
   },
   about: {
     kicker: { en: "The shop", ar: "الورشة" },
-    title: { en: "A fabrication bench built for Riyadh lead times.", ar: "منصة تصنيع مبنية لمواعيد الرياض." },
+    title: { en: "A fabrication bench built for Riyadh lead times.", ar: "ورشة تصنيع تلتزم بمواعيد التسليم في الرياض." },
     p1: {
       en: "MTE started because prototype work in the city was split across three vendors: someone with a printer, someone with a laser, and someone who would touch carbon. Jobs slipped. Files got lost. We put the three processes in one office in Al Mursalat.",
-      ar: "بدأت إم تي إي لأن عمل النماذج في المدينة كان يتوزع على ثلاثة موردين: من يملك طابعة، ومن يملك ليزراً، ومن يلمس الكربون. كانت المواعيد تفلت والملفات تضيع. جمعنا العمليات الثلاث في مكتب واحد بحي المرسلات.",
+      ar: "بدأت إم تي إي لأن تصنيع النماذج في الرياض كان موزعاً على ثلاثة موردين: واحد للطباعة، وواحد لليزر، وواحد لألياف الكربون. كانت المواعيد تتأخر والملفات تضيع. جمعنا العمليات الثلاث في مكتب واحد في حي المرسلات.",
     },
     p2: {
       en: "We invoice with VAT, we speak Arabic and English on the bench, and we would rather refuse a file than print a part that will warp in 45° storage.",
-      ar: "نصدر فواتير بضريبة القيمة المضافة، ونتحدث العربية والإنجليزية في الورشة، ونفضّل رفض ملف على طباعة قطعة ستلتوي في تخزين ٤٥ درجة.",
+      ar: "نصدر فواتير بضريبة القيمة المضافة، ونتحدث العربية والإنجليزية في الورشة. وإذا كان الملف سيُنتج قطعة تلتوي عند حفظها في حرارة ٤٥ درجة مئوية، نرفضه بدل طباعته.",
     },
     visit: { en: "Visit the shop", ar: "زر الورشة" },
   },

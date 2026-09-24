@@ -14,7 +14,7 @@ export function WhatsAppButton() {
 
   return (
     <motion.a
-      href={whatsappLink(text)}
+      href={whatsappLink(text, lang)}
       target="_blank"
       rel="noreferrer"
       whileHover={{ scale: 1.08, y: -4 }}

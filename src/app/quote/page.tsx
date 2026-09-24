@@ -43,7 +43,7 @@ export default function QuotePage() {
     ]
       .filter(Boolean)
       .join("\n");
-    window.location.href = whatsappLink(message);
+    window.location.href = whatsappLink(message, lang);
   }
 
   const field =

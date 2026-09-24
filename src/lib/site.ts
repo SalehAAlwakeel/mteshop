@@ -7,10 +7,18 @@ export const site = {
   },
   url: "https://mteksa.shop",
   email: "sales@mteksa.com",
-  phoneDisplay: "+966 11 510 4488",
-  phoneTel: "+966115104488",
-  /** WhatsApp in international format without +. Set NEXT_PUBLIC_WHATSAPP to override. */
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "966500000000",
+  phones: {
+    en: {
+      display: "+966592662000",
+      tel: "+966592662000",
+      whatsapp: "966592662000",
+    },
+    ar: {
+      display: "+966552522913",
+      tel: "+966552522913",
+      whatsapp: "966552522913",
+    },
+  },
   vatNumber: "310000000000003",
   crNumber: "1010000000",
   city: {
@@ -50,7 +58,7 @@ export function mapsEmbed(lang: "en" | "ar") {
   return `https://maps.google.com/maps?q=${lat},${lng}&z=18&hl=${lang}&output=embed`;
 }
 
-export function whatsappLink(text?: string) {
+export function whatsappLink(text?: string, lang: "en" | "ar" = "en") {
   const encoded = text ? `?text=${encodeURIComponent(text)}` : "";
-  return `https://wa.me/${site.whatsapp}${encoded}`;
+  return `https://wa.me/${site.phones[lang].whatsapp}${encoded}`;
 }

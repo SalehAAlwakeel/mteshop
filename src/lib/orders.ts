@@ -28,32 +28,42 @@ export function createOrderId() {
   return `MTE-${day}-${n}`;
 }
 
+export function quoteBody(order: Order) {
+  return orderMessage(order).replace(/^MTE order /, "MTE quote ");
+}
+
 export function quoteMailto(order: Order) {
   const subject = `MTE quote ${order.id}`;
-  const body = orderMessage(order).replace(/^MTE order /, "MTE quote ");
-  return `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  return `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(quoteBody(order))}`;
+}
+
+export async function sendQuoteEmail(order: Order) {
+  const res = await fetch(`https://formsubmit.co/ajax/${site.email}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({
+      name: order.customer.name,
+      phone: order.customer.phone,
+      _subject: `MTE quote ${order.id}`,
+      _captcha: "false",
+      _template: "box",
+      message: quoteBody(order),
+    }),
+  });
+  if (!res.ok) return false;
+  const data = (await res.json()) as { success?: string | boolean };
+  return data.success === true || data.success === "true";
 }
 
 export function orderMessage(order: Order) {
   const lines = [
     `MTE order ${order.id}`,
     `${order.customer.name} · ${order.customer.phone}`,
-    order.customer.email,
-    `${order.delivery} · ${order.payment}`,
-    order.customer.city + (order.customer.district ? ` · ${order.customer.district}` : ""),
-    order.customer.address,
     "",
-    ...order.items.map(
-      (item) =>
-        `• ${item.qty}× ${item.name.en} — ${item.unitPrice} SAR` +
-        (item.options.length
-          ? ` (${item.options.map((o) => o.value.en).join(", ")})`
-          : ""),
-    ),
-    "",
-    `Subtotal ${order.subtotal} SAR (incl. VAT)`,
-    `Shipping ${order.shipping} SAR`,
-    `Total ${order.total} SAR`,
+    ...order.items.map((item) => {
+      const options = item.options.map((o) => o.value.en).join(", ");
+      return `• ${item.qty}× ${item.name.en}${options ? ` (${options})` : ""}`;
+    }),
     order.customer.notes ? `\nNotes: ${order.customer.notes}` : "",
     `\nShop: ${site.address.en}`,
   ];

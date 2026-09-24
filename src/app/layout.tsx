@@ -74,7 +74,7 @@ const jsonLd = {
   name: site.legalName,
   image: `${site.url}/opengraph-image`,
   url: site.url,
-  telephone: site.phoneTel,
+  telephone: [site.phones.en.tel, site.phones.ar.tel],
   email: site.email,
   currenciesAccepted: "SAR",
   paymentAccepted: "Cash, Bank Transfer, Mada, Apple Pay",

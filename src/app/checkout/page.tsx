@@ -1,13 +1,11 @@
 "use client";
 
 import { Button } from "@/components/Button";
-import { cartSubtotal, useCart } from "@/lib/cart";
-import { formatSar, shippingCost, vatBreakdown } from "@/lib/format";
+import { useCart } from "@/lib/cart";
 import { useI18n } from "@/lib/i18n";
-import { createOrderId, quoteMailto, type Order } from "@/lib/orders";
-import { site } from "@/lib/site";
+import { createOrderId, quoteMailto, sendQuoteEmail, type Order } from "@/lib/orders";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 const saudiPhone = /^(05|5|\+9665|9665)\d{8}$/;
 
@@ -17,26 +15,8 @@ export default function CheckoutPage() {
   const clear = useCart((s) => s.clear);
   const router = useRouter();
   const [error, setError] = useState("");
-  const [delivery, setDelivery] = useState<Order["delivery"]>("riyadh");
-  const [payment, setPayment] = useState<Order["payment"]>("whatsapp");
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    city: lang === "ar" ? "الرياض" : "Riyadh",
-    district: "",
-    address: "",
-    notes: "",
-  });
-
-  const subtotal = cartSubtotal(items);
-  const shipping = shippingCost(delivery, subtotal);
-  const total = subtotal + shipping;
-  const vat = useMemo(() => vatBreakdown(subtotal).vat, [subtotal]);
-
-  function set<K extends keyof typeof form>(key: K, value: string) {
-    setForm((f) => ({ ...f, [key]: value }));
-  }
+  const [sending, setSending] = useState(false);
+  const [form, setForm] = useState({ name: "", phone: "" });
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -49,22 +29,43 @@ export default function CheckoutPage() {
       id: createOrderId(),
       createdAt: new Date().toISOString(),
       lang,
-      customer: { ...form, phone },
-      delivery,
-      payment,
+      customer: {
+        name: form.name.trim(),
+        phone,
+        email: "",
+        city: "",
+        district: "",
+        address: "",
+        notes: "",
+      },
+      delivery: "pickup",
+      payment: "whatsapp",
       items,
-      shipping,
-      subtotal,
-      total,
+      shipping: 0,
+      subtotal: 0,
+      total: 0,
     };
     window.localStorage.setItem("mte-last-order", JSON.stringify(order));
     const existing = JSON.parse(window.localStorage.getItem("mte-orders") || "[]") as Order[];
     window.localStorage.setItem("mte-orders", JSON.stringify([order, ...existing].slice(0, 20)));
-    const mail = document.createElement("a");
-    mail.href = quoteMailto(order);
-    mail.click();
-    clear();
-    router.push(`/checkout/success?id=${order.id}`);
+    setSending(true);
+    void sendQuoteEmail(order)
+      .then((sent) => {
+        if (!sent) {
+          const mail = document.createElement("a");
+          mail.href = quoteMailto(order);
+          mail.click();
+        }
+        clear();
+        router.push(`/checkout/success?id=${order.id}&sent=${sent ? "email" : "mailapp"}`);
+      })
+      .catch(() => {
+        const mail = document.createElement("a");
+        mail.href = quoteMailto(order);
+        mail.click();
+        clear();
+        router.push(`/checkout/success?id=${order.id}&sent=mailapp`);
+      });
   }
 
   if (items.length === 0) {
@@ -91,95 +92,30 @@ export default function CheckoutPage() {
 
         <fieldset className="space-y-3">
           <legend className="text-sm font-semibold">{t("checkout.details")}</legend>
-          <input className={field} placeholder={t("checkout.name")} value={form.name} onChange={(e) => set("name", e.target.value)} required />
-          <input className={field} placeholder={t("checkout.phone")} value={form.phone} onChange={(e) => set("phone", e.target.value)} required />
-          <input className={field} type="email" placeholder={t("checkout.email")} value={form.email} onChange={(e) => set("email", e.target.value)} />
-          <div className="grid gap-3 sm:grid-cols-2">
-            <input className={field} placeholder={t("checkout.city")} value={form.city} onChange={(e) => set("city", e.target.value)} />
-            <input className={field} placeholder={t("checkout.district")} value={form.district} onChange={(e) => set("district", e.target.value)} />
-          </div>
-          <textarea className={`${field} min-h-20`} placeholder={t("checkout.address")} value={form.address} onChange={(e) => set("address", e.target.value)} />
-          <textarea className={`${field} min-h-20`} placeholder={t("checkout.notes")} value={form.notes} onChange={(e) => set("notes", e.target.value)} />
-        </fieldset>
-
-        <fieldset>
-          <legend className="mb-3 text-sm font-semibold">{t("checkout.delivery")}</legend>
-          <div className="grid gap-2">
-            {(
-              [
-                ["pickup", "checkout.pickup", 0],
-                ["riyadh", "checkout.riyadh", site.shipping.riyadh],
-                ["ksa", "checkout.ksa", site.shipping.ksa],
-              ] as const
-            ).map(([id, label, price]) => (
-              <label key={id} className="flex cursor-pointer flex-wrap items-center justify-between gap-2 rounded-2xl border border-line px-4 py-3 text-sm has-[:checked]:border-laser">
-                <span className="flex min-w-0 items-center gap-3">
-                  <input type="radio" name="delivery" checked={delivery === id} onChange={() => setDelivery(id)} />
-                  {t(label)}
-                </span>
-                <span className="text-mute">
-                  {id !== "pickup" && subtotal >= site.shipping.freeFrom
-                    ? t("checkout.free")
-                    : formatSar(price, lang)}
-                </span>
-              </label>
-            ))}
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend className="mb-3 text-sm font-semibold">{t("checkout.payment")}</legend>
-          <div className="grid gap-2">
-            {(
-              [
-                ["whatsapp", "checkout.whatsappPay"],
-                ["mada", "checkout.mada"],
-                ["bank", "checkout.bank"],
-                ["cod", "checkout.cod"],
-              ] as const
-            ).map(([id, label]) => (
-              <label key={id} className="flex cursor-pointer items-center gap-3 rounded-2xl border border-line px-4 py-3 text-sm has-[:checked]:border-laser">
-                <input type="radio" name="payment" checked={payment === id} onChange={() => setPayment(id)} />
-                {t(label)}
-              </label>
-            ))}
-          </div>
+          <input className={field} placeholder={t("checkout.name")} value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} required />
+          <input className={field} placeholder={t("checkout.phone")} value={form.phone} onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))} required />
         </fieldset>
 
         {error && <p className="text-sm text-ember">{error}</p>}
-        <Button type="submit">{t("checkout.place")}</Button>
+        <Button type="submit" disabled={sending}>
+          {t("checkout.place")}
+        </Button>
       </form>
 
       <aside className="h-fit rounded-3xl border border-line bg-panel p-6">
         <h2 className="font-display text-xl">{t("checkout.summary")}</h2>
         <ul className="mt-4 space-y-3 text-sm">
           {items.map((item) => (
-            <li key={item.id} className="flex justify-between gap-3">
-              <span>
-                {item.qty}× {item.name[lang]}
-              </span>
-              <span>{formatSar(item.unitPrice * item.qty, lang)}</span>
+            <li key={item.id}>
+              {item.qty}× {item.name[lang]}
+              {item.options.length > 0 && (
+                <span className="mt-1 block text-mute">
+                  {item.options.map((o) => o.value[lang]).join(" · ")}
+                </span>
+              )}
             </li>
           ))}
         </ul>
-        <div className="mt-6 space-y-2 border-t border-line pt-4 text-sm">
-          <p className="flex justify-between">
-            <span>{t("cart.subtotal")}</span>
-            <span>{formatSar(subtotal, lang)}</span>
-          </p>
-          <p className="flex justify-between text-mute">
-            <span>{t("checkout.vat")}</span>
-            <span>{formatSar(Math.round(vat), lang)}</span>
-          </p>
-          <p className="flex justify-between">
-            <span>{t("checkout.shipping")}</span>
-            <span>{formatSar(shipping, lang)}</span>
-          </p>
-          <p className="flex justify-between text-lg font-semibold text-laser">
-            <span>{t("checkout.total")}</span>
-            <span>{formatSar(total, lang)}</span>
-          </p>
-        </div>
       </aside>
     </div>
   );
