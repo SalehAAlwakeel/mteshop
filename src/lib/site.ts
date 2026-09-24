@@ -5,7 +5,7 @@ export const site = {
     en: "3D printing · Carbon fiber · Laser",
     ar: "طباعة ثلاثية الأبعاد · ألياف الكربون · ليزر",
   },
-  url: "https://mte.sa",
+  url: "https://mteksa.shop",
   email: "sales@mteksa.com",
   phoneDisplay: "+966 11 510 4488",
   phoneTel: "+966115104488",
