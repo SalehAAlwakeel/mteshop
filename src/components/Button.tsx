@@ -3,7 +3,7 @@
 import { cn } from "@/lib/cn";
 import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 const styles = {
   primary:
@@ -22,11 +22,16 @@ export function Button({
   className,
   children,
   type = "button",
-  ...props
-}: ButtonHTMLAttributes<HTMLButtonElement> & {
+  onClick,
+  disabled,
+}: {
   href?: string;
   variant?: keyof typeof styles;
+  className?: string;
   children: ReactNode;
+  type?: "button" | "submit" | "reset";
+  onClick?: () => void;
+  disabled?: boolean;
 }) {
   const reduce = useReducedMotion();
   const cls = cn(
@@ -52,7 +57,7 @@ export function Button({
   }
 
   return (
-    <motion.button type={type} className={cls} {...anim} {...props}>
+    <motion.button type={type} className={cls} onClick={onClick} disabled={disabled} {...anim}>
       <span className="pointer-events-none absolute inset-0 btn-sheen" />
       <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
     </motion.button>
