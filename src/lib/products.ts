@@ -424,54 +424,6 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "acrylic-logo-sign",
-    sku: "MTE-LZ-SGN",
-    category: "laser",
-    name: { en: "Acrylic logo sign", ar: "لافتة شعار أكريليك" },
-    short: {
-      en: "Cut, engraved, or layered brand signage for offices and storefronts.",
-      ar: "لافتات شعار مقصوصة أو محفورة أو متعددة الطبقات للمكاتب والواجهات.",
-    },
-    description: {
-      en: "We cut your vector logo from cast acrylic, optionally engrave a back plate, and offer standoff mounts. Popular with Riyadh clinics, fit-outs, and events. Send AI, SVG, DXF, or a high-res PNG.",
-      ar: "نقص شعارك المتجه من أكريليك مصبوب، مع خيار حفر لوحة خلفية، وثبّات مباعدة. شائع في عيادات الرياض والتشطيبات والفعاليات. أرسل AI أو SVG أو DXF أو PNG عالي الدقة.",
-    },
-    price: 185,
-    fromPrice: true,
-    leadTimeDays: 3,
-    featured: true,
-    bestseller: true,
-    madeToOrder: true,
-    options: [
-      {
-        id: "size",
-        name: { en: "Width", ar: "العرض" },
-        values: [
-          { id: "40", label: { en: "40 cm", ar: "٤٠ سم" } },
-          { id: "60", label: { en: "60 cm +90", ar: "٦٠ سم ‎+٩٠" }, priceDelta: 90 },
-          { id: "90", label: { en: "90 cm +210", ar: "٩٠ سم ‎+٢١٠" }, priceDelta: 210 },
-        ],
-      },
-      {
-        id: "color",
-        name: { en: "Acrylic", ar: "الأكريليك" },
-        values: [
-          { id: "clear", label: { en: "Clear", ar: "شفاف" } },
-          { id: "black", label: { en: "Black", ar: "أسود" } },
-          { id: "gold", label: { en: "Mirror gold +55", ar: "ذهبي مرآة ‎+٥٥" }, priceDelta: 55 },
-          { id: "white", label: { en: "White", ar: "أبيض" } },
-        ],
-      },
-    ],
-    specs: [
-      { label: { en: "Thickness", ar: "السماكة" }, value: { en: "5 mm cast acrylic", ar: "أكريليك مصبوب ٥ مم" } },
-    ],
-    includes: [
-      { en: "Vector cleanup", ar: "تنظيف الملف المتجه" },
-      { en: "Standoff hardware optional", ar: "ثبّات مباعدة اختيارية" },
-    ],
-  },
-  {
     slug: "wood-name-plaque",
     sku: "MTE-LZ-WD",
     category: "laser",
