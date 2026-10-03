@@ -334,7 +334,6 @@ export function AeroShowcase() {
   const stageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const cardRef = useRef<HTMLElement>(null);
-  const dotRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const progressRef = useRef(0);
   const [active, setActive] = useState(0);
   const [load, setLoad] = useState(0);
@@ -350,10 +349,9 @@ export function AeroShowcase() {
     if (!stage || !canvas || !track) return;
 
     let dead = false;
-    const phone = window.matchMedia("(max-width: 767px)").matches;
     const renderer = new THREE.WebGLRenderer({
       canvas,
-      antialias: !phone,
+      antialias: true,
       alpha: false,
       powerPreference: "high-performance",
     });
@@ -425,7 +423,7 @@ export function AeroShowcase() {
       // Wide screens match the designed frame. A portrait phone is much narrower,
       // so the camera steps back until the whole car fits the horizontal view.
       pull = camera.aspect >= 1.15 ? 1 : Math.min(3.2, 1.35 / camera.aspect);
-      const ratioCap = width < 768 ? 1.25 : 1.5;
+      const ratioCap = width < 768 ? 2 : 1.5;
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, ratioCap));
       renderer.setSize(width, height, false);
       ortho.left = 0;
@@ -528,16 +526,12 @@ export function AeroShowcase() {
       const halfW = card ? card.offsetWidth / 2 : 1;
       const halfH = card ? card.offsetHeight / 2 : 1;
       const positions = pointerAttr.array as Float32Array;
-      SHOTS.forEach((shot, shotIndex) => {
-        const dot = dotRefs.current[shotIndex];
-        if (!dot || !readyRef.current || !width || !height) return;
+      const shot = SHOTS[index];
+      if (shot && readyRef.current && width && height) {
         proj.copy(shot.anchor).project(camera);
         const visible = proj.z < 1;
         const x = Math.round((proj.x * 0.5 + 0.5) * width);
         const y = Math.round((-proj.y * 0.5 + 0.5) * height);
-        dot.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
-        dot.style.opacity = visible ? (shotIndex === index ? "1" : "0.55") : "0";
-        if (shotIndex !== index) return;
         const dx = x - cx;
         const dy = y - cy;
         const scale = Math.min(halfW / Math.abs(dx || 0.001), halfH / Math.abs(dy || 0.001));
@@ -564,7 +558,7 @@ export function AeroShowcase() {
         positions[16] = y + 7;
         positions[17] = 0;
         pointer.visible = visible;
-      });
+      }
       pointerAttr.needsUpdate = true;
 
       if (onScreen) {
@@ -626,21 +620,6 @@ export function AeroShowcase() {
         className="sticky top-16 h-[calc(100svh-4rem)] overflow-hidden sm:top-[4.5rem] sm:h-[calc(100svh-4.5rem)]"
       >
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" style={{ touchAction: "pan-y" }} />
-
-        {SHOTS.map((item, index) => (
-          <button
-            key={item.token}
-            ref={(node) => {
-              dotRefs.current[index] = node;
-            }}
-            type="button"
-            aria-label={`${item.code} ${item.token}`}
-            onClick={() => goTo(index)}
-            className="absolute start-0 top-0 z-20 grid h-11 w-11 place-items-center opacity-0"
-          >
-            <span className="h-3 w-3 rounded-full border border-white/80 bg-white/80" />
-          </button>
-        ))}
 
         <div className="pointer-events-none absolute start-4 top-3 z-30 sm:start-6 sm:top-6">
           <p className="font-mono text-[11px] tracking-[0.15em] text-white/70 uppercase">MTE / AERO</p>
