@@ -24,12 +24,6 @@ export function Footer() {
             <Link href="/shop" className="hover:text-laser">
               {t("nav.shop")}
             </Link>
-            <Link href="/services" className="hover:text-laser">
-              {t("nav.services")}
-            </Link>
-            <Link href="/quote" className="hover:text-laser">
-              {t("nav.quote")}
-            </Link>
           </div>
         </div>
         <div>
@@ -54,7 +48,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-line px-4 py-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] text-center text-xs break-words text-mute">
-        © {year} {site.legalName}. {t("footer.rights")} · VAT {site.vatNumber}
+        © {year} {site.legalName}. {t("footer.rights")}
       </div>
     </footer>
   );

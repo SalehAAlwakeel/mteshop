@@ -32,15 +32,19 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="text-[11px] uppercase tracking-[0.18em] text-mute">
           {product.category === "3d-printing"
             ? lang === "ar"
-              ? "طباعة"
-              : "Print"
+              ? "سيارات"
+              : "Car"
             : product.category === "carbon-fiber"
               ? lang === "ar"
                 ? "كربون"
                 : "Carbon"
-              : lang === "ar"
-                ? "ليزر"
-                : "Laser"}
+              : product.category === "custom"
+                ? lang === "ar"
+                  ? "حسب الطلب"
+                  : "Custom"
+                : lang === "ar"
+                  ? "ليزر"
+                  : "Laser"}
         </p>
         <h3 className="mt-1 font-display text-lg font-semibold">{product.name[lang]}</h3>
         <p className="mt-2 line-clamp-2 text-sm leading-6 text-mute">{product.short[lang]}</p>

@@ -16,22 +16,6 @@
   color-scheme: dark;
 }
 
-html.light {
-  --ink: #f3f5f8;
-  --ink-2: #ffffff;
-  --panel: #ffffff;
-  --panel-2: #eef1f6;
-  --line: #d0d6e0;
-  --mute: #5c6574;
-  --paper: #141820;
-  --laser: #0b8f7c;
-  --laser-2: #0aa892;
-  --ember: #e04a20;
-  --sand: #8d6a3a;
-  --wash: rgba(16, 20, 28, 0.06);
-  color-scheme: light;
-}
-
 @theme inline {
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
@@ -100,26 +84,6 @@ html[lang="ar"] .font-display {
     ),
     radial-gradient(1200px 500px at 20% -10%, color-mix(in oklab, var(--laser) 18%, transparent), transparent 50%),
     radial-gradient(900px 400px at 90% 10%, color-mix(in oklab, var(--ember) 14%, transparent), transparent 45%);
-}
-
-html.light .carbon {
-  background-image:
-    repeating-linear-gradient(
-      45deg,
-      rgba(16, 22, 32, 0.04) 0 1px,
-      transparent 1px 8px
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      rgba(16, 22, 32, 0.03) 0 1px,
-      transparent 1px 8px
-    ),
-    radial-gradient(1200px 500px at 20% -10%, color-mix(in oklab, var(--laser) 12%, transparent), transparent 50%),
-    radial-gradient(900px 400px at 90% 10%, color-mix(in oklab, var(--ember) 10%, transparent), transparent 45%);
-}
-
-html.light .logo-mark {
-  filter: invert(1);
 }
 
 .grid-fade {

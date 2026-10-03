@@ -14,24 +14,87 @@ export type Lang = "en" | "ar";
 
 const dictionary = {
   nav: {
-    shop: { en: "Shop", ar: "المتجر" },
+    shop: { en: "Car parts", ar: "قطع السيارات" },
     services: { en: "Services", ar: "الخدمات" },
     quote: { en: "Get a quote", ar: "اطلب عرض سعر" },
     about: { en: "About", ar: "من نحن" },
     contact: { en: "Contact", ar: "تواصل" },
     cart: { en: "Cart", ar: "السلة" },
   },
+  car: {
+    kicker: { en: "Your car", ar: "سيارتك" },
+    title: { en: "Make, model, year, material, then the parts.", ar: "الشركة، ثم الموديل، ثم السنة، ثم المادة، ثم القطع." },
+    body: {
+      en: "Tell us the car, the material, and the parts. We email the request to the shop.",
+      ar: "حدّد السيارة والمادة والقطع. نرسل الطلب إلى بريد الورشة.",
+    },
+    howKicker: { en: "How it works", ar: "كيف نعمل" },
+    howTitle: {
+      en: "We scan the car, design it in CAD, then you choose the material.",
+      ar: "نمسح السيارة، نصممها في CAD، ثم تختار المادة.",
+    },
+    s1t: { en: "1 · Scan", ar: "١ · المسح" },
+    s1b: {
+      en: "We scan your car in the shop so the part follows the real body.",
+      ar: "نمسح سيارتك في الورشة حتى تتبع القطعة الهيكل الحقيقي.",
+    },
+    s2t: { en: "2 · CAD", ar: "٢ · التصميم" },
+    s2b: {
+      en: "We design the part in CAD for the make, model, and year you choose.",
+      ar: "نصمم القطعة في CAD على الشركة والموديل والسنة التي تختارها.",
+    },
+    s3t: { en: "3 · Material", ar: "٣ · المادة" },
+    s3b: {
+      en: "You choose real carbon fiber, or 3D printed ASA. ASA is the outdoor print plastic: it keeps its colour in the sun and stays stable in Riyadh heat.",
+      ar: "تختار ألياف كربون حقيقية، أو طباعة ثلاثية الأبعاد من ASA. مادة ASA هي بلاستيك الطباعة الخارجي: تحافظ على لونها تحت الشمس وتثبت في حرارة الرياض.",
+    },
+    look: { en: "The parts", ar: "القطع" },
+    customLabel: { en: "Custom part (optional)", ar: "قطعة حسب الطلب (اختياري)" },
+    customBody: {
+      en: "Describe a piece that is not in the list. Leave this blank if the parts above are enough.",
+      ar: "صِف قطعة غير موجودة في القائمة. اترك الحقل فارغاً إذا كانت القطع أعلاه كافية.",
+    },
+    customPlaceholder: {
+      en: "Example: a vented bonnet for a 1994 RX-7, or a bracket that is not in the list.",
+      ar: "مثال: غطاء محرك بفتحات لسيارة RX-7 موديل 1994، أو قاعدة تثبيت غير موجودة في القائمة.",
+    },
+    photos: { en: "Photos (optional)", ar: "صور (اختياري)" },
+    photosHint: {
+      en: "Add pictures of the part or the car. They are sent with the quote email.",
+      ar: "أضف صور القطعة أو السيارة. تُرسل مع بريد الطلب.",
+    },
+    photosAdd: { en: "Add photos", ar: "أضف صوراً" },
+    photosLimit: { en: "You can add up to 4 photos.", ar: "يمكنك إضافة ٤ صور كحد أقصى." },
+    make: { en: "Make", ar: "الشركة" },
+    model: { en: "Model", ar: "الموديل" },
+    year: { en: "Year", ar: "السنة" },
+    choose: { en: "Choose", ar: "اختر" },
+    parts: { en: "Parts you want", ar: "القطع التي تريدها" },
+    material: { en: "Material", ar: "المادة" },
+    carbon: { en: "Carbon fiber", ar: "ألياف كربون" },
+    carbonHint: { en: "Real carbon layup, shaped to your car.", ar: "فرش كربون حقيقي، يُشكَّل على سيارتك." },
+    print: { en: "3D printed ASA", ar: "طباعة ثلاثية الأبعاد ASA" },
+    printHint: {
+      en: "ASA is the outdoor filament. It resists UV and holds up in Saudi heat. We do not print body parts in PLA or ABS.",
+      ar: "ASA هي خامة الطباعة الصحيحة للخارج. تقاوم الشمس وتتحمل حرارة المملكة. لا نطبع قطع الهيكل من PLA أو ABS.",
+    },
+    send: { en: "Send to the shop", ar: "أرسل إلى الورشة" },
+    required: {
+      en: "Choose a make, a model, a year, a material, at least one part or a note or a photo, your name, and a Saudi mobile.",
+      ar: "اختر الشركة والموديل والسنة والمادة وقطعة أو وصفاً أو صورة، ثم الاسم ورقم جوال سعودي.",
+    },
+  },
   hero: {
-    kicker: { en: "Riyadh fabrication studio", ar: "استوديو تصنيع في الرياض" },
+    kicker: { en: "Car parts in Riyadh", ar: "قطع سيارات في الرياض" },
     title: {
-      en: "Print it. Lay it up. Cut it. Delivered in the Kingdom.",
-      ar: "نطبعها. نصممها. نركبها.",
+      en: "Choose your car. Pick the parts.",
+      ar: "اختر سيارتك. ثم اختر القطع.",
     },
     body: {
-      en: "MTE makes 3D printed parts, real carbon fiber, and laser-cut or engraved work from our office in Al Mursalat, Riyadh. Upload a file, pick a catalog piece, or walk in.",
-      ar: "إم تي إي تصنع قطعاً مطبوعة ثلاثياً، وألياف كربون حقيقية، وأعمال قص وحفر بالليزر من مكتبنا في حي المرسلات بالرياض. ارفع ملفاً، اختر من الكتالوج، أو زرنا.",
+      en: "Wide body kits, spoilers, side skirts, front lips, rear diffusers, illuminated wheel caps, air intakes, and interiors. We scan the car, design the part in CAD, then build it in carbon fiber or 3D printed ASA.",
+      ar: "أطقم هيكل عريض، أجنحة، عتبات جانبية، ليب أمامي، دفيوزر خلفي، أغطية جنوط مضيئة، مداخل هواء، وداخلية. نمسح السيارة، نصمم القطعة في CAD، ثم نصنعها من ألياف الكربون أو بطباعة ASA.",
     },
-    shop: { en: "Shop parts", ar: "تسوق القطع" },
+    shop: { en: "Order parts", ar: "اطلب القطع" },
     quote: { en: "Send a file", ar: "أرسل ملفاً" },
     pickup: { en: "Same-week pickup in Riyadh", ar: "استلام في الرياض خلال الأسبوع" },
   },
@@ -217,14 +280,14 @@ const dictionary = {
   },
   about: {
     kicker: { en: "The shop", ar: "الورشة" },
-    title: { en: "A fabrication bench built for Riyadh lead times.", ar: "ورشة تصنيع تلتزم بمواعيد التسليم في الرياض." },
+    title: { en: "We scan the car, design the part, and build it in Riyadh.", ar: "نمسح السيارة، نصمم القطعة، ونصنعها في الرياض." },
     p1: {
-      en: "MTE started because prototype work in the city was split across three vendors: someone with a printer, someone with a laser, and someone who would touch carbon. Jobs slipped. Files got lost. We put the three processes in one office in Al Mursalat.",
-      ar: "بدأت إم تي إي لأن تصنيع النماذج في الرياض كان موزعاً على ثلاثة موردين: واحد للطباعة، وواحد لليزر، وواحد لألياف الكربون. كانت المواعيد تتأخر والملفات تضيع. جمعنا العمليات الثلاث في مكتب واحد في حي المرسلات.",
+      en: "Every part starts on your car. We scan the body in the shop, then design the spoiler, diffuser, lip, skirts, or wide body in CAD for that make, model, and year.",
+      ar: "كل قطعة تبدأ من سيارتك. نمسح الهيكل في الورشة، ثم نصمم الجناح أو الدفيوزر أو الليب أو العتبات أو طقم الهيكل في CAD على الشركة والموديل والسنة.",
     },
     p2: {
-      en: "We invoice with VAT, we speak Arabic and English on the bench, and we would rather refuse a file than print a part that will warp in 45° storage.",
-      ar: "نصدر فواتير بضريبة القيمة المضافة، ونتحدث العربية والإنجليزية في الورشة. وإذا كان الملف سيُنتج قطعة تلتوي عند حفظها في حرارة ٤٥ درجة مئوية، نرفضه بدل طباعته.",
+      en: "After the design, you choose the material: real carbon fiber, or 3D printed ASA. ASA is the outdoor printing plastic. It holds colour in the sun and stays stable in Riyadh heat, so it is what we print instead of PLA or ABS.",
+      ar: "بعد التصميم تختار المادة: ألياف كربون حقيقية، أو طباعة ثلاثية الأبعاد من ASA. ASA هي بلاستيك الطباعة الخارجي. تحافظ على لونها تحت الشمس وتثبت في حرارة الرياض، لذلك نطبع بها بدل PLA أو ABS.",
     },
     visit: { en: "Visit the shop", ar: "زر الورشة" },
   },
@@ -265,10 +328,10 @@ const dictionary = {
   },
   footer: {
     blurb: {
-      en: "3D printing, carbon fiber parts, laser cutting and engraving. Fabricated in Riyadh.",
-      ar: "طباعة ثلاثية الأبعاد، قطع ألياف الكربون، قص وحفر بالليزر. يُصنع في الرياض.",
+      en: "Printed car parts, made in Riyadh for the vehicle you choose.",
+      ar: "قطع سيارات مطبوعة، تُصنع في الرياض للسيارة التي تختارها.",
     },
-    shop: { en: "Shop", ar: "المتجر" },
+    shop: { en: "Car parts", ar: "قطع السيارات" },
     company: { en: "Company", ar: "الشركة" },
     legal: { en: "Legal", ar: "قانوني" },
     privacy: { en: "Privacy", ar: "الخصوصية" },
@@ -283,13 +346,20 @@ const dictionary = {
     title: { en: "This page was not fabricated.", ar: "هذه الصفحة لم تُصنع." },
     body: { en: "Try the shop or send a quote instead.", ar: "جرّب المتجر أو أرسل عرض سعر." },
   },
+  viewer: {
+    loading: { en: "Loading the car", ar: "جارٍ تحميل السيارة" },
+    drag: { en: "Drag to look around", ar: "اسحب لتدوير السيارة" },
+    pick: { en: "Parts", ar: "القطع" },
+    failed: { en: "The car model could not load.", ar: "تعذر تحميل نموذج السيارة." },
+    partKicker: { en: "Car part", ar: "قطعة سيارة" },
+    order: { en: "Order this part", ar: "اطلب هذه القطعة" },
+    back: { en: "Back to the car", ar: "العودة إلى السيارة" },
+  },
   common: {
     language: { en: "العربية", ar: "English" },
     openMenu: { en: "Open menu", ar: "افتح القائمة" },
     close: { en: "Close", ar: "إغلاق" },
     whatsapp: { en: "WhatsApp", ar: "واتساب" },
-    themeLight: { en: "Switch to light mode", ar: "التبديل إلى الوضع الفاتح" },
-    themeDark: { en: "Switch to dark mode", ar: "التبديل إلى الوضع الداكن" },
   },
 } as const;
 

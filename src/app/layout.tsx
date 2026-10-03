@@ -32,9 +32,9 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-const title = "MTE — Mechatronics Tech Engineering | 3D printing, carbon fiber & laser in Riyadh";
+const title = "MTE — Printed car parts in Riyadh";
 const description =
-  "Order 3D printed parts, carbon fiber fabrication, and laser cutting & engraving from Mechatronics Tech Engineering (MTE) in Riyadh, Saudi Arabia.";
+  "Choose your car make and model, then order widebody kits, spoilers, skirts, lips, diffusers, wheel caps, air intakes, and interiors from MTE in Riyadh.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -116,11 +116,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${outfit.variable} ${syne.variable} ${ibm.variable} ${jetbrains.variable} h-full antialiased`}
     >
       <body className="carbon min-h-full flex flex-col">
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("mte-theme");if(t!=="light"&&t!=="dark"){t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";}document.documentElement.classList.toggle("light",t==="light");document.documentElement.classList.toggle("dark",t==="dark");document.documentElement.style.colorScheme=t;}catch(e){}})();`,
-          }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

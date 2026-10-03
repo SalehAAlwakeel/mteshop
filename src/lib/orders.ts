@@ -37,18 +37,19 @@ export function quoteMailto(order: Order) {
   return `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(quoteBody(order))}`;
 }
 
-export async function sendQuoteEmail(order: Order) {
+export async function sendQuoteEmail(order: Order, photos: File[] = []) {
+  const body = new FormData();
+  body.append("name", order.customer.name);
+  body.append("phone", order.customer.phone);
+  body.append("_subject", `MTE quote ${order.id}`);
+  body.append("_captcha", "false");
+  body.append("_template", "box");
+  body.append("message", quoteBody(order));
+  for (const photo of photos) body.append("attachment", photo, photo.name);
   const res = await fetch(`https://formsubmit.co/ajax/${site.email}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify({
-      name: order.customer.name,
-      phone: order.customer.phone,
-      _subject: `MTE quote ${order.id}`,
-      _captcha: "false",
-      _template: "box",
-      message: quoteBody(order),
-    }),
+    headers: { Accept: "application/json" },
+    body,
   });
   if (!res.ok) return false;
   const data = (await res.json()) as { success?: string | boolean };

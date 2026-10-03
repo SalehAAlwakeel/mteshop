@@ -3,9 +3,8 @@
 import { Logo } from "@/components/Logo";
 import { useCart, cartCount } from "@/lib/cart";
 import { useI18n } from "@/lib/i18n";
-import { useTheme } from "@/lib/theme";
 import { cn } from "@/lib/cn";
-import { Menu, Moon, ShoppingBag, Sun, X } from "lucide-react";
+import { Menu, ShoppingBag, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -13,15 +12,12 @@ import { useEffect, useState } from "react";
 
 const links = [
   { href: "/shop", key: "nav.shop" as const },
-  { href: "/services", key: "nav.services" as const },
-  { href: "/quote", key: "nav.quote" as const },
   { href: "/about", key: "nav.about" as const },
   { href: "/contact", key: "nav.contact" as const },
 ];
 
 export function Header() {
   const { t, toggleLang } = useI18n();
-  const { theme, toggleTheme } = useTheme();
   const pathname = usePathname();
   const count = useCart((s) => cartCount(s.items));
   const [open, setOpen] = useState(false);
@@ -53,16 +49,6 @@ export function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
-          <motion.button
-            type="button"
-            onClick={toggleTheme}
-            whileHover={{ scale: 1.08, y: -2 }}
-            whileTap={{ scale: 0.94 }}
-            className="grid h-10 w-10 place-items-center rounded-full border border-line hover:border-laser/40"
-            aria-label={theme === "dark" ? t("common.themeLight") : t("common.themeDark")}
-          >
-            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-          </motion.button>
           <motion.button
             type="button"
             onClick={toggleLang}

@@ -41,10 +41,7 @@ export function Hero() {
           transition={{ delay: 0.24 }}
           className="mt-8 flex flex-wrap gap-3"
         >
-          <Button href="/shop">{t("hero.shop")}</Button>
-          <Button href="/quote" variant="ghost">
-            {t("hero.quote")}
-          </Button>
+          <Button href="/#how">{t("hero.shop")}</Button>
         </motion.div>
         <p className="mt-6 text-sm text-sand">{t("hero.pickup")}</p>
       </div>

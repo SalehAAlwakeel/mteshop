@@ -1,11 +1,17 @@
-import { Hero } from "@/components/Hero";
-import { HomePage } from "@/components/HomePage";
+import { CarHero } from "@/components/CarHero";
+import { CarOrder } from "@/components/CarOrder";
 
-export default function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ part?: string }>;
+}) {
+  const { part } = await searchParams;
+
   return (
     <>
-      <Hero />
-      <HomePage />
+      <CarHero />
+      <CarOrder initialPart={part} />
     </>
   );
 }
